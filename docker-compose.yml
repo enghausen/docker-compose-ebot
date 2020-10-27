@@ -69,7 +69,7 @@ mysql:
   environment:
     - MYSQL_DATABASE=ebotv3
     - MYSQL_USER=ebotv3
-    - MYSQL_PASSWORD=ebotv3
+    - MYSQL_PASSWORD=CHANGE_ME
     - MYSQL_ROOT_PASSWORD=CHANGE_ME
     - MYSQL_ROOT_HOST=%
   command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION" --character-set-server=utf8 --collation-server=utf8_unicode_ci
