@@ -1,5 +1,5 @@
 ebot:
-  image: enghausen/ebot
+  image: hsfactory/ebot
   restart: always
   links:
     - "mysql:mysql"
@@ -29,7 +29,7 @@ ebot:
     TOORNAMENT_PLUGIN_KEY: ''
 
 ebotweb:
-  image: enghausen/ebotweb
+  image: hsfactory/ebotweb
   restart: always
   links:
     - "mysql:mysql"
