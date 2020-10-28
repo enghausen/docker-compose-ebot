@@ -12,12 +12,12 @@ ebot:
     - /opt/docker/ebot/logs:/ebot/logs
     - /opt/docker/ebot/demos:/ebot/demos
   environment:
-    EXTERNAL_IP: 'xxx.xxx.xxx.xxx'
+    EXTERNAL_IP: '${IP}'
     MYSQL_HOST: 'mysql'
     MYSQL_PORT: '3306'
-    MYSQL_DB: 'ebotv3'
-    MYSQL_USER: 'ebotv3'
-    MYSQL_PASS: 'CHANGE_ME'
+    MYSQL_DB: '${MYSQL_DATABASE}'
+    MYSQL_USER: '${MYSQL_USER}'
+    MYSQL_PASS: '${MYSQL_PASSWORD}'
     LO3_METHOD: 'restart'
     KO3_METHOD: 'restart'
     DEMO_DOWNLOAD: 'true'
@@ -39,16 +39,16 @@ ebotweb:
     - /opt/docker/ebot/demos:/opt/ebot/demos
     - /opt/docker/ebot/logs:/opt/ebot/logs
   environment:
-    EBOT_IP: 'xxx.xxx.xxx.xxx'
+    EBOT_IP: '${IP}'
     EBOT_PORT: '12360'
-    EBOT_ADMIN_USER: 'admin'
-    EBOT_ADMIN_PASS: 'CHANGE_ME'
+    EBOT_ADMIN_USER: '${EBOT_ADMIN_USER}'
+    EBOT_ADMIN_PASS: '${EBOT_ADMIN_PASS}'
     EBOT_ADMIN_MAIL: ''
     MYSQL_HOST: 'mysql'
     MYSQL_PORT: '3306'
-    MYSQL_DB: 'ebotv3'
-    MYSQL_USER: 'ebotv3'
-    MYSQL_PASS: 'CHANGE_ME'
+    MYSQL_DB: '${MYSQL_DATABASE}'
+    MYSQL_USER: '${MYSQL_USER}'
+    MYSQL_PASS: '${MYSQL_PASSWORD}'
     DEMO_DOWNLOAD: 'true'
     DEFAULT_RULES: 'ebot_config'
     TOORNAMENT_ID: ''
@@ -67,9 +67,9 @@ mysql:
   expose:
     - "3306"
   environment:
-    - MYSQL_DATABASE=ebotv3
-    - MYSQL_USER=ebotv3
-    - MYSQL_PASSWORD=CHANGE_ME
-    - MYSQL_ROOT_PASSWORD=CHANGE_ME
-    - MYSQL_ROOT_HOST=%
+    - MYSQL_DATABASE: '${MYSQL_DATABASE}'
+    - MYSQL_USER: '${MYSQL_USER}'
+    - MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    - MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    - MYSQL_ROOT_HOST: '${DOCKER_NETWORK}'
   command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION" --character-set-server=utf8 --collation-server=utf8_unicode_ci
