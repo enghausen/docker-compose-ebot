@@ -27,6 +27,7 @@ ebot:
     NODE_STARTUP_METHOD: 'node'
     USE_DELAY_END_RECORD: 'true'
     TOORNAMENT_PLUGIN_KEY: ''
+    MAPS: '${MAPS}'
 
 ebotweb:
   image: enghausen/ebotweb
