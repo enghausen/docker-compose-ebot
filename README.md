@@ -22,6 +22,9 @@ EBOT_ADMIN_PASS=MySuperSecretEbotPassword
 REMIND_RECORD=true
 DAMAGE_REPORT=false
 
+#MAPS
+MAPS=de_dust2,de_inferno,de_mirage,de_nuke,de_overpass,de_train,de_vertigo
+
 #EBOT WEB SETTINGS
 DEFAULT_RULES=ebot_config
 
