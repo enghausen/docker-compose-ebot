@@ -13,6 +13,7 @@ Edit the following settings in [.env](.env) to your needs.
 #### .env
 ````
 #NETWORK
+EBOT_PROTO=http://
 IP=<External_IP>
 DOCKER_NETWORK=172.%.%.%
 
