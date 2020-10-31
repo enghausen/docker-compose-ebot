@@ -1,5 +1,5 @@
 ebot:
-  image: enghausen/ebot
+  image: enghausen/ebot-ssl
   restart: always
   links:
     - "mysql:mysql"
@@ -30,7 +30,7 @@ ebot:
     MAPS: '${MAPS}'
 
 ebotweb:
-  image: enghausen/ebotweb
+  image: enghausen/ebotweb-ssl
   restart: always
   links:
     - "mysql:mysql"
