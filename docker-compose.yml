@@ -47,6 +47,8 @@ ebotweb:
     - /ssl:/ssl
   environment:
     SERVERNAME: '${SERVERNAME}'
+    SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
+    SSL_KEY_PATH: '${SSL_KEY_PATH}'
     EBOT_PROTO: '${EBOT_PROTO}'
     EBOT_IP: '${IP}'
     EBOT_PORT: '12360'
