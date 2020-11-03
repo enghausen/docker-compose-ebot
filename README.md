@@ -1,4 +1,6 @@
-docker-compose-ebot
+NOT WORKING! WORK IN PROGRESS!!
+=============
+docker-compose-ebot (SSL branch)
 ================
 
 Pre-Requisites
@@ -11,6 +13,7 @@ Edit the following settings in [.env](.env) to your needs.
 #### .env
 ````
 #NETWORK
+EBOT_PROTO=http://
 IP=<External_IP>
 DOCKER_NETWORK=172.%.%.%
 

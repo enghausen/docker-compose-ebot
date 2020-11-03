@@ -1,5 +1,5 @@
 ebot:
-  image: enghausen/ebot
+  image: enghausen/ebot-ssl
   restart: always
   links:
     - "mysql:mysql"
@@ -11,6 +11,7 @@ ebot:
   volumes:
     - /opt/docker/ebot/logs:/ebot/logs
     - /opt/docker/ebot/demos:/ebot/demos
+    - /ssl:/ssl
   environment:
     EXTERNAL_IP: '${IP}'
     MYSQL_HOST: 'mysql'
@@ -18,6 +19,9 @@ ebot:
     MYSQL_DB: '${MYSQL_DATABASE}'
     MYSQL_USER: '${MYSQL_USER}'
     MYSQL_PASS: '${MYSQL_PASSWORD}'
+    SSL_ENABLED: '${SSL_ENABLED}'
+    SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
+    SSL_KEY_PATH: '${SSL_KEY_PATH}'
     LO3_METHOD: 'restart'
     KO3_METHOD: 'restart'
     DEMO_DOWNLOAD: 'true'
@@ -30,16 +34,22 @@ ebot:
     MAPS: '${MAPS}'
 
 ebotweb:
-  image: enghausen/ebotweb
+  image: enghausen/ebotweb-ssl
   restart: always
   links:
     - "mysql:mysql"
   ports:
     - "80:80"
+    - "443:443"
   volumes:
     - /opt/docker/ebot/demos:/opt/ebot/demos
     - /opt/docker/ebot/logs:/opt/ebot/logs
+    - /ssl:/ssl
   environment:
+    SERVERNAME: '${SERVERNAME}'
+    SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
+    SSL_KEY_PATH: '${SSL_KEY_PATH}'
+    EBOT_PROTO: '${EBOT_PROTO}'
     EBOT_IP: '${IP}'
     EBOT_PORT: '12360'
     EBOT_ADMIN_USER: '${EBOT_ADMIN_USER}'
