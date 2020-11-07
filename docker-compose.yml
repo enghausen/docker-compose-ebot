@@ -30,7 +30,7 @@ services:
       REMIND_RECORD: '${REMIND_RECORD}'
       DAMAGE_REPORT: '${DAMAGE_REPORT}'
       DELAY_READY: 'false'
-      NODE_STARTUP_METHOD: 'node'
+      NODE_STARTUP_METHOD: 'none'
       USE_DELAY_END_RECORD: 'true'
       TOORNAMENT_PLUGIN_KEY: ''
       MAPS: '${MAPS}'
