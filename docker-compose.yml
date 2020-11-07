@@ -1,88 +1,89 @@
-ebot:
-  image: enghausen/ebot-ssl
-  restart: always
-  links:
-    - "mysql:mysql"
-  ports:
-    - "12360:12360"
-    - "12361:12361"
-    - "12360:12360/udp"
-    - "12361:12361/udp"
-  volumes:
-    - /opt/docker/ebot/logs:/ebot/logs
-    - /opt/docker/ebot/demos:/ebot/demos
-    - /ssl:/ssl
-  environment:
-    EXTERNAL_IP: '${IP}'
-    MYSQL_HOST: 'mysql'
-    MYSQL_PORT: '3306'
-    MYSQL_DB: '${MYSQL_DATABASE}'
-    MYSQL_USER: '${MYSQL_USER}'
-    MYSQL_PASS: '${MYSQL_PASSWORD}'
-    SSL_ENABLED: '${SSL_ENABLED}'
-    SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
-    SSL_KEY_PATH: '${SSL_KEY_PATH}'
-    LO3_METHOD: 'restart'
-    KO3_METHOD: 'restart'
-    DEMO_DOWNLOAD: 'true'
-    REMIND_RECORD: '${REMIND_RECORD}'
-    DAMAGE_REPORT: '${DAMAGE_REPORT}'
-    DELAY_READY: 'false'
-    NODE_STARTUP_METHOD: 'node'
-    USE_DELAY_END_RECORD: 'true'
-    TOORNAMENT_PLUGIN_KEY: ''
-    MAPS: '${MAPS}'
-
-ebotweb:
-  image: enghausen/ebotweb-ssl
-  restart: always
-  links:
-    - "mysql:mysql"
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - /opt/docker/ebot/demos:/opt/ebot/demos
-    - /opt/docker/ebot/logs:/opt/ebot/logs
-    - /ssl:/ssl
-  environment:
-    SERVERNAME: '${SERVERNAME}'
-    SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
-    SSL_KEY_PATH: '${SSL_KEY_PATH}'
-    EBOT_PROTO: '${EBOT_PROTO}'
-    EBOT_IP: '${IP}'
-    EBOT_PORT: '12360'
-    EBOT_ADMIN_USER: '${EBOT_ADMIN_USER}'
-    EBOT_ADMIN_PASS: '${EBOT_ADMIN_PASS}'
-    EBOT_ADMIN_MAIL: ''
-    MYSQL_HOST: 'mysql'
-    MYSQL_PORT: '3306'
-    MYSQL_DB: '${MYSQL_DATABASE}'
-    MYSQL_USER: '${MYSQL_USER}'
-    MYSQL_PASS: '${MYSQL_PASSWORD}'
-    DEMO_DOWNLOAD: 'true'
-    DEFAULT_RULES: '${DEFAULT_RULES}'
-    TOORNAMENT_ID: ''
-    TOORNAMENT_SECRET: ''
-    TOORNAMENT_API_KEY: ''
-    TOORNAMENT_PLUGIN_KEY: ''
-    MAPS: '${MAPS}'
-
-mysql:
-  image: mysql:5.7.32
-  restart: always
-  volumes:
-    - /opt/docker/ebot/mysql:/var/lib/mysql
-    - ./my.cnf:/etc/my.cnf
-    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  ports:
-    - "3306:3306"
-  expose:
-    - "3306"
-  environment:
-    MYSQL_DATABASE: '${MYSQL_DATABASE}'
-    MYSQL_USER: '${MYSQL_USER}'
-    MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
-    MYSQL_ROOT_HOST: '${DOCKER_NETWORK}'
-    MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-  command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION" --character-set-server=utf8 --collation-server=utf8_unicode_ci
+version: "3.8"
+services:
+  ebot-ssl:
+    image: enghausen/ebot-ssl:latest
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "12360:12360"
+      - "12361:12361"
+      - "12360:12360/udp"
+      - "12361:12361/udp"
+    volumes:
+      - /opt/docker/ebot/logs:/ebot/logs
+      - /opt/docker/ebot/demos:/ebot/demos
+      - /opt/docker/ebot/ssl:/ebot/ssl
+    environment:
+      EXTERNAL_IP: '${IP}'
+      MYSQL_HOST: 'mysql'
+      MYSQL_PORT: '3306'
+      MYSQL_DB: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASS: '${MYSQL_PASSWORD}'
+      SSL_ENABLED: '${SSL_ENABLED}'
+      SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
+      SSL_KEY_PATH: '${SSL_KEY_PATH}'
+      LO3_METHOD: 'restart'
+      KO3_METHOD: 'restart'
+      DEMO_DOWNLOAD: 'true'
+      REMIND_RECORD: '${REMIND_RECORD}'
+      DAMAGE_REPORT: '${DAMAGE_REPORT}'
+      DELAY_READY: 'false'
+      NODE_STARTUP_METHOD: 'node'
+      USE_DELAY_END_RECORD: 'true'
+      TOORNAMENT_PLUGIN_KEY: ''
+      MAPS: '${MAPS}'
+      
+  ebotweb-ssl:
+    image: enghausen/ebotweb-ssl:latest
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /opt/docker/ebot/demos:/opt/ebot/demos
+      - /opt/docker/ebot/logs:/opt/ebot/logs
+      - /opt/docker/ebot/ssl:/opt/ebot/ssl
+    environment:
+      SERVERNAME: '${SERVERNAME}'
+      SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
+      SSL_KEY_PATH: '${SSL_KEY_PATH}'
+      EBOT_PROTO: '${EBOT_PROTO}'
+      EBOT_IP: '${IP}'
+      EBOT_PORT: '12360'
+      EBOT_ADMIN_USER: '${EBOT_ADMIN_USER}'
+      EBOT_ADMIN_PASS: '${EBOT_ADMIN_PASS}'
+      EBOT_ADMIN_MAIL: ''
+      MYSQL_HOST: 'mysql'
+      MYSQL_PORT: '3306'
+      MYSQL_DB: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASS: '${MYSQL_PASSWORD}'
+      DEMO_DOWNLOAD: 'true'
+      DEFAULT_RULES: '${DEFAULT_RULES}'
+      TOORNAMENT_ID: ''
+      TOORNAMENT_SECRET: ''
+      TOORNAMENT_API_KEY: ''
+      TOORNAMENT_PLUGIN_KEY: ''
+      MAPS: '${MAPS}'
+      
+  mysql:
+    image: mysql:5.7.32
+    restart: always
+    expose:
+      - "3306"
+    volumes:
+      - /opt/docker/ebot/mysql:/var/lib/mysql
+      - ./my.cnf:/etc/my.cnf
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_HOST: '${DOCKER_NETWORK}'
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION" --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    
