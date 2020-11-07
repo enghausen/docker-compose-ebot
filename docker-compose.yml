@@ -75,7 +75,7 @@ services:
     restart: always
     volumes:
       - /opt/docker/ebot/mysql:/var/lib/mysql
-      - ./my.cnf:/etc/my.cnf
+      - ./mysql/my.cnf:/etc/my.cnf
     environment:
       MYSQL_DATABASE: '${MYSQL_DATABASE}'
       MYSQL_USER: '${MYSQL_USER}'
