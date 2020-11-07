@@ -42,9 +42,9 @@ ebotweb:
     - "80:80"
     - "443:443"
   volumes:
-    - /opt/docker/ebot/demos:/opt/ebot/demos
-    - /opt/docker/ebot/logs:/opt/ebot/logs
-    - /opt/docker/ebot/ssl:/opt/ebot/ssl
+    - /opt/docker/ebot/demos:/ebot/demos
+    - /opt/docker/ebot/logs:/ebot/logs
+    - /opt/docker/ebot/ssl:/ebot/ssl
   environment:
     SERVERNAME: '${SERVERNAME}'
     SSL_CERTIFICATE_PATH: '${SSL_CERTIFICATE_PATH}'
