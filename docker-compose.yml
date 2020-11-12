@@ -2,9 +2,11 @@ version: "3.8"
 services:
   ebot-ssl:
     image: enghausen/ebot-ssl:latest
+    container_name: ebot-ssl
     restart: always
     depends_on:
       - mysql
+      - ebotweb-ssl
     ports:
       - "12360:12360"
       - "12360:12360/udp"
@@ -43,6 +45,7 @@ services:
       
   ebotweb-ssl:
     image: enghausen/ebotweb-ssl:latest
+    container_name: ebotweb-ssl
     restart: always
     depends_on:
       - mysql
@@ -83,6 +86,7 @@ services:
       
   mysql:
     image: mysql:5.7.32
+    container_name: mysql
     restart: always
     volumes:
       - /opt/docker/ebot/mysql:/var/lib/mysql
