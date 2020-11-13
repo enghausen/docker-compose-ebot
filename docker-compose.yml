@@ -56,6 +56,7 @@ services:
       - /opt/docker/ebot/demos:/ebot/demos
       - /opt/docker/ebot/logs:/ebot/logs
       - /opt/docker/ebot/ssl:/ebot/ssl
+      - /var/run/docker.sock:/var/run/docker.sock 
     environment:
       DOMAIN: '${DOMAIN}'
       MYSQL_HOST: '${MYSQL_HOST}'
