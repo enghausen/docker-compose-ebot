@@ -5,7 +5,6 @@ services:
     container_name: ebot-ssl
     restart: always
     depends_on:
-      - mysql
       - ebotweb-ssl
     ports:
       - "12360:12360"
