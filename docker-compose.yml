@@ -55,6 +55,7 @@ services:
       - /opt/docker/ebot/demos:/ebot/demos
       - /opt/docker/ebot/logs:/ebot/logs
       - /opt/docker/ebot/ssl:/ebot/ssl
+      - /opt/docker/ebot/acme.sh:/ebot/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock 
     environment:
       DOMAIN: '${DOMAIN}'
