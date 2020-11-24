@@ -25,8 +25,9 @@ Installation
 Settings
 ---------
 Edit the following settings in [.env](.env) to your needs.
+
 #### .env
-`
+````
 ##################################################
 # Change these settings
 # Domain name - This is needed for SSL to work
@@ -81,7 +82,7 @@ DEFAULT_OVERTIME_MAX_ROUND=3
 DEFAULT_OVERTIME_STARTMONEY=10000
 MODE=net
 REFRESH_TIME=30
-`
+````
 
 Thanks to
 -------
