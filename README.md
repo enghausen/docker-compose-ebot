@@ -1,4 +1,4 @@
-docker-compose-ebot
+docker-compose-ebot-ssl
 ================
 
 Tested on
