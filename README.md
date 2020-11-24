@@ -1,7 +1,7 @@
 docker-compose-ebot
 ================
 
-Testet on
+Tested on
 --------------
 * Ubuntu 20.04.1 LTS  
 * Docker version 19.03.13, build 4484c46d9d  
