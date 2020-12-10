@@ -1,6 +1,14 @@
 docker-compose-ebot-ssl
 ================
 
+Known bugs
+--------------
+* Demo upload not working with CSay! CSay (Latest version: 3.2.6): http://www.esport-tools.net/download/CSay-CSGO.zip - Does not support SSL upload. I created a ticket on the eBot-CSGO repo: https://github.com/deStrO/eBot-CSGO/issues/169 and hoping for a updated CURL version with SSL support in the CSay plugin. **Workaround:** See https://github.com/enghausen/docker-compose-ebot-ssl#demo-upload
+* eBot does not load the server.cfg when match end, if the value of 90 or higher is used for tv_delay (like tv_delay 91) - This seems to be a bug in the eBot-CSGO code and due to some kind of RCON timeout. I tried to fix it with no luck.
+
+Preface
+--------------
+
 Tested on
 --------------
 * Ubuntu 20.04.1 LTS  
@@ -83,6 +91,9 @@ DEFAULT_OVERTIME_STARTMONEY=10000
 MODE=net
 REFRESH_TIME=30
 ````
+
+Demo upload
+-------
 
 Thanks to
 -------
