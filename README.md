@@ -6,11 +6,35 @@ Known bugs
 * **Demo upload is not working with CSay**  
 CSay (Latest version: 3.2.6): http://www.esport-tools.net/download/CSay-CSGO.zip - Does not support SSL upload. I created a ticket on the eBot-CSGO repo: https://github.com/deStrO/eBot-CSGO/issues/169 and hoping for a updated CURL version with SSL support in the CSay plugin.  
 **Workaround:** See https://github.com/enghausen/docker-compose-ebot-ssl#demo-upload
-* **eBot does not load the server.cfg when match end**  
+* **eBot does not exec the server.cfg when match end**  
 If the value of 90 or higher is used for tv_delay (like tv_delay 91) - This seems to be a bug in the eBot-CSGO code and due to some kind of RCON timeout. I tried to fix it with no luck.
 
-Preface
+Introduction
 --------------
+I wanted to create a pure SSL ebot and ebotweb docker image. I ended up with some few improvements and bug fixes along the way. I am piggybacking on github users as jffz (where I forked the docker images from), DrumSlayers and CounterStrafe for improvements and of course the creators of ebot.  
+I use my own forked repositories for everything. I made some small changes for ebot and ebotweb to support SSL and a bigger change to add support for a "secure upload" feature. 
+  
+**docker-ebot-ssl:** https://github.com/enghausen/docker-ebotweb-ssl  
+**docker-ebotweb-ssl:** https://github.com/enghausen/docker-ebotweb-ssl  
+**eBot-CSGO:** https://github.com/enghausen/eBot-CSGO  
+**eBot-CSGO-Web:** https://github.com/enghausen/eBot-CSGO-Web  
+
+Improvements
+--------------
+* Cleanup in Docker files and updated to latest supported software versions. I also added some more software for Acme.sh and Docker.
+* Cleanup and streamline in the entrypoint.sh files. This include identical SED command in both files.
+* Removed some php bugs and some files not getting updated correct.
+* Support for custom maps for both ebot and ebotweb.
+* Support for alot more customization in the ebot and ebotweb config files.
+* Running the websocket_server.js (ebot) with forever to increase stability
+* Added acme.sh to get certificates and automatic renewal when the time comes (crontab). This also restarts Apache (ebotweb) and the websocket_server.js (ebot) to reload the new certificate.
+* Added wait-for-it.sh to ebot to make sure the ebotweb is online (to make sure it got the new certificate).
+* Automatic getting the EXTERNAL_IP for the domain (ebot). This could potentially make some trouble for some use cases.
+* A "secure upload" feature in the websocket_server.js
+
+Secure Upload
+--------------
+
 
 Tested on
 --------------
