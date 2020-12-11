@@ -35,9 +35,9 @@ Improvements
 
 Secure Upload
 --------------
-I took the time to make a major change in the websocket_server.js (ebot) to make a "secure upload" feature. This means this services now perform a IP check to insure you are allow to upload a .dem to the https://$domain:12360/upload - If disabled everyone can just `curl -F "file=@FILE.dem" https://$DOMAIN:12360/upload` and upload some files to your server.  
+I took the time to make a major change in the websocket_server.js (ebot) to make a "secure upload" feature. This means this service now perform a IP check to insure you are allowed to upload a .dem file to the https://$DOMAIN:12360/upload - If disabled everyone can just `curl -F "file=@FILE.dem" https://$DOMAIN:12360/upload` and upload some garbage files to your server.  
 This could also be handled on the network/firewall level. But this is not possible with every cloud/VPS provider. Thats why I needed this.  
-To allow a remote host to upload files to your ebot server you can define a IP or IP Range in the .env file. Look for the `IPCUSTOMRANGE1=8.8.8.8/32`  
+To allow a remote host to upload files to your ebot server you can define an IP or IP Range in the .env file. Look for the `IPCUSTOMRANGE1=8.8.8.8/32` entry.
 To disable this feature just change `FOREVER_SECUREUPLOAD=TRUE` to `FOREVER_SECUREUPLOAD=FALSE`
 
 Tested on
@@ -125,11 +125,26 @@ REFRESH_TIME=30
 
 Demo upload
 -------
+Because CSay does not support demo upload with the HTTPS protocol I personal use some custom bash scripts to look for ended matches.  
+I created this to work with my LinuxGSM server setup (https://linuxgsm.com/lgsm/csgoserver/), but should be kind of easy to customize and use with other hosting software aswell.  
+I am working on something for the platform **Pterodactyl** (https://pterodactyl.io/) and external provides like **Dathost** (https://dathost.net/)  
+
+Source: https://github.com/enghausen/scripts-CSGO/tree/main/liga/ebot  
+
+**Please do not use this blindly and expecting it to work!!**
+
 
 Toornament
 -------
-This is also tested and working with https://www.toornament.com/
-
+This is also tested and working with https://www.toornament.com/ (Go to https://developer.toornament.com/ to request an API key)  
+````
+# Toornament
+TOORNAMENT_ID=
+TOORNAMENT_SECRET=
+TOORNAMENT_API_KEY=
+TOORNAMENT_PLUGIN_KEY=
+````
+To be honest I'm not sure if the `TOORNAMENT_PLUGIN_KEY` is getting used. It work with only the **API key**, **Client ID**  and **Client secret** I got from them.
 
 Thanks to
 -------
