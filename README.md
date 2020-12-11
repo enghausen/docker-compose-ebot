@@ -30,11 +30,15 @@ Improvements
 * Added acme.sh to get certificates and automatic renewal when the time comes (crontab). This also restarts Apache (ebotweb) and the websocket_server.js (ebot) to reload the new certificate.
 * Added wait-for-it.sh to ebot to make sure the ebotweb is online (to make sure it got the new certificate).
 * Automatic getting the EXTERNAL_IP for the domain (ebot). This could potentially make some trouble for some use cases.
+* Increased the maximum .dem filesize from 200MB to 1024MB in websocket_server.js
 * A "secure upload" feature in the websocket_server.js
 
 Secure Upload
 --------------
-
+I took the time to make a major change in the websocket_server.js (ebot) to make a "secure upload" feature. This means this services now perform a IP check to insure you are allow to upload a .dem to the https://$domain:12360/upload - If disabled everyone can just `curl -F "file=@FILE.dem" https://$DOMAIN:12360/upload` and upload some files to your server.  
+This could also be handled on the network/firewall level. But this is not possible with every cloud/VPS provider. Thats why I needed this.  
+To allow a remote host to upload files to your ebot server you can define a IP or IP Range in the .env file. Look for the `IPCUSTOMRANGE1=8.8.8.8/32`  
+To disable this feature just change `FOREVER_SECUREUPLOAD=TRUE` to `FOREVER_SECUREUPLOAD=FALSE`
 
 Tested on
 --------------
@@ -54,8 +58,8 @@ Installation
 * `git clone https://github.com/enghausen/docker-compose-ebot-ssl.git`
 * Edit the .env file and as a minimum change the DOMAIN
 * `docker-compose up -d`
-* Connect to the running eBot web interface at `https://$domain/`
-* Connect to the admin eBot web interface at `https://$domain/admin.php`
+* Connect to the running eBot web interface at `https://$DOMAIN/`
+* Connect to the admin eBot web interface at `https://$DOMAIN/admin.php`
 
 Settings
 ---------
@@ -121,6 +125,11 @@ REFRESH_TIME=30
 
 Demo upload
 -------
+
+Toornament
+-------
+This is also tested and working with https://www.toornament.com/
+
 
 Thanks to
 -------
