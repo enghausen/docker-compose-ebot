@@ -1,6 +1,21 @@
 docker-compose-ebot-ssl
 ================
 
+Table of contents
+--------------
+1. [Known bugs](#known-bugs)  
+2. [Introduction](#introduction)  
+3. [Improvements](#improvements)  
+4. [Secure Upload](#secure-upload)  
+5. [Tested on](#tested-on)  
+6. [Pre-Requisites](#pre-requisites)  
+7. [Installation](#installation)  
+8. [Settings](#settings)  
+9. [Demo Upload](#demo-upload)  
+10. [Toornament](#toornament)  
+11. [MYSQL](#mysql)  
+12. [Thanks to](#thanks-to)  
+
 Known bugs
 --------------
 * **Demo upload is not working with CSay**  
@@ -24,7 +39,7 @@ Improvements
 * Cleanup in Docker files and updated to latest supported software versions. I also added some more software for Acme.sh and Docker.
 * Cleanup and streamline in the entrypoint.sh files. This include identical SED commands in both files.
 * Added `character-set-server=utf8` and `--collation-server=utf8_unicode_ci` and a custom my.cnf file to make sure the usage of UTF8 for the MYSQL.
-* Removed some php bugs and some files not getting updated correct.
+* Removed some php bugs and some files not getting updated correctly.
 * Support for custom maps for both ebot and ebotweb.
 * Support for alot more customization in the ebot and ebotweb config files.
 * Running the websocket_server.js (ebot) with forever to increase stability
@@ -124,7 +139,7 @@ MODE=net
 REFRESH_TIME=30
 ````
 
-Demo upload
+Demo Upload
 -------
 Because CSay does not support demo upload with the HTTPS protocol I personal use some custom bash scripts to look for ended matches.  
 I created this for my LinuxGSM server setup (https://linuxgsm.com/lgsm/csgoserver/), but should be kind of easy to customize and use with other hosting software aswell.  
