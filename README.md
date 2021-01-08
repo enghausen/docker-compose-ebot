@@ -73,7 +73,7 @@ Installation
 ---------
 * `git clone https://github.com/enghausen/docker-compose-ebot-ssl.git`
 * Edit the .env file and as a minimum change the DOMAIN
-* `docker-compose up -d`
+* `sudo docker-compose up -d`
 * Connect to the running eBot web interface at `https://$DOMAIN/`
 * Connect to the admin eBot web interface at `https://$DOMAIN/admin.php`
 
